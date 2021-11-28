@@ -1,2 +1,3 @@
-testFailSanity() (gas: 2068)
-testSanity() (gas: 201)
+testMikhailInlinedFullMul() (gas: 1569)
+testMikhail() (gas: 1643)
+testRemco() (gas: 1164)

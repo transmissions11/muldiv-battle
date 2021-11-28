@@ -1,37 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity 0.7.6;
 
-contract Contract {
-    function mikhailMulDiv(
-        uint256 x,
-        uint256 y,
-        uint256 z
-    ) external pure returns (uint256) {
-        uint256 mm = mulmod(x, y, uint256(-1));
-        uint256 l = x * y;
-        uint256 h = mm - l;
-        if (mm < l) h -= 1;
-
-        require(h < z);
-        uint256 mm2 = mulmod(x, y, z);
-        if (mm2 > l) h -= 1;
-        l -= mm2;
-        uint256 pow2 = z & -z;
-        z /= pow2;
-        l /= pow2;
-        l += h * ((-pow2) / pow2 + 1);
-        uint256 r = 1;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        r *= 2 - z * r;
-        return l * r;
-    }
-
+contract MulDivs {
+    // from https://xn--2-umb.com/21/muldiv/
     function remcoMulDiv(
         uint256 a,
         uint256 b,
@@ -132,5 +103,70 @@ contract Contract {
         // is no longer required.
         result = prod0 * inv;
         return result;
+    }
+
+    // from https://medium.com/coinmonks/math-in-solidity-part-3-percents-and-proportions-4db014e080b1
+    function mikhailMulDiv(
+        uint256 x,
+        uint256 y,
+        uint256 z
+    ) external pure returns (uint256) {
+        (uint256 l, uint256 h) = fullMul(x, y);
+        require(h < z);
+        uint256 mm = mulmod(x, y, z);
+        if (mm > l) h -= 1;
+        l -= mm;
+        uint256 pow2 = z & -z;
+        z /= pow2;
+        l /= pow2;
+        l += h * ((-pow2) / pow2 + 1);
+        uint256 r = 1;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        return l * r;
+    }
+
+    // derived from https://medium.com/coinmonks/math-in-solidity-part-3-percents-and-proportions-4db014e080b1
+    function mikhailMulDivInlinedFullMul(
+        uint256 x,
+        uint256 y,
+        uint256 z
+    ) external pure returns (uint256) {
+        uint256 mm = mulmod(x, y, uint256(-1));
+        uint256 l = x * y;
+        uint256 h = mm - l;
+        if (mm < l) h -= 1;
+        require(h < z);
+        uint256 mm2 = mulmod(x, y, z);
+        if (mm2 > l) h -= 1;
+        l -= mm2;
+        uint256 pow2 = z & -z;
+        z /= pow2;
+        l /= pow2;
+        l += h * ((-pow2) / pow2 + 1);
+        uint256 r = 1;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        r *= 2 - z * r;
+        return l * r;
+    }
+
+    // from https://medium.com/coinmonks/math-in-solidity-part-3-percents-and-proportions-4db014e080b1
+    function fullMul(uint256 x, uint256 y) internal pure returns (uint256 l, uint256 h) {
+        uint256 mm = mulmod(x, y, uint256(-1));
+        l = x * y;
+        h = mm - l;
+        if (mm < l) h -= 1;
     }
 }

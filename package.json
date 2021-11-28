@@ -1,14 +1,14 @@
 {
-  "name": "dapptools-template",
+  "name": "muldiv-battle",
   "license": "AGPL-3.0-only",
   "version": "1.0.0",
-  "description": "Streamlined template for getting started with DappTools and Solmate.",
+  "description": "Gas comparison between Remco Bloemen's and Mikhail Vladimirov's mulDiv implementations.",
   "files": [
     "src/**/*.sol"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/transmissions11/dapptools-template.git"
+    "url": "git+https://github.com/transmissions11/muldiv-battle.git"
   },
   "devDependencies": {
     "prettier": "^2.3.1",

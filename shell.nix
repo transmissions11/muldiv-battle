@@ -8,7 +8,7 @@ let
 in
   pkgs.mkShell {
     src = null;
-    name = "dapptools-template";
+    name = "muldiv-battle";
     buildInputs = with pkgs; [
       pkgs.dapp
     ];
