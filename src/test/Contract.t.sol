@@ -1,16 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-pragma solidity 0.8.10;
+pragma solidity 0.7.6;
 
 import {DSTestPlus} from "solmate/test/utils/DSTestPlus.sol";
 
-contract ContractTest is DSTestPlus {
-    function setUp() public {}
+import {Contract} from "../Contract.sol";
 
-    function testSanity() public {
-        assertTrue(true);
+contract ContractTest is DSTestPlus {
+    Contract code;
+
+    function setUp() public {
+        code = new Contract();
     }
 
-    function testFailSanity() public {
-        assertTrue(false);
+    function testRemco() public {
+        assertEq(code.remcoMulDiv(5e18, 0.1e18, 1e18), 0.5e18);
+    }
+
+    function testMikhail() public {
+        assertEq(code.mikhailMulDiv(5e18, 0.1e18, 1e18), 0.5e18);
     }
 }
