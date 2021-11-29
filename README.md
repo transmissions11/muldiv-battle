@@ -4,15 +4,7 @@ Gas comparison between [Remco Bloemen's](https://xn--2-umb.com/21/muldiv/) and [
 
 ## Results
 
-```sh
-❯ dapp test
-+ dapp clean
-+ rm -rf out
-Running 3 tests for src/test/MulDivs.t.sol:MulDivTests
-[PASS] testMikhailInlinedFullMul() (gas: 1569)
-[PASS] testMikhail() (gas: 1643)
-[PASS] testRemco() (gas: 1164)
-```
+Results can be found in the auto-generated [`.gas-snapshot`](.gas-snapshot) file.
 
 ## Getting Started
 
