@@ -1,3 +1,6 @@
-testMikhailInlinedFullMul() (gas: 1569)
-testMikhail() (gas: 1643)
+testMikhailBig() (gas: 1666)
+testMikhailInlinedFullMul() (gas: 1591)
+testMikhail() (gas: 1666)
+testRemcoBig() (gas: 1512)
 testRemco() (gas: 1164)
+testMikhailInlinedFullMulBig() (gas: 1612)
